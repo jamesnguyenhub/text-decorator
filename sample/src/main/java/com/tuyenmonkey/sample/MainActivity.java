@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, text, Toast.LENGTH_SHORT).show();
           }
         }, 250, 270, false)
+        .setTextColor(android.R.color.holo_green_light, 250, 270)
         .build();
   }
 }
