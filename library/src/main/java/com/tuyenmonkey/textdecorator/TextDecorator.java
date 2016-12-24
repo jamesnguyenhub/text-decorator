@@ -18,6 +18,7 @@ import android.text.style.BulletSpan;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.ImageSpan;
+import android.text.style.MaskFilterSpan;
 import android.text.style.QuoteSpan;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.ScaleXSpan;
@@ -40,35 +41,36 @@ public class TextDecorator {
   private TextView textView;
   private String content;
   private SpannableString decoratedContent;
-  private int flag;
+  private int flags;
 
   private TextDecorator(TextView textView, String content) {
     this.textView = textView;
     this.content = content;
     this.decoratedContent = new SpannableString(content);
-    this.flag = Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
+    this.flags = Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
   }
 
   public static TextDecorator decorate(TextView textView, String content) {
     return new TextDecorator(textView, content);
   }
 
-  public TextDecorator setFlag(final int flag) {
-    this.flag = flag;
+  public TextDecorator setFlags(final int flags) {
+    this.flags = flags;
 
     return this;
   }
 
   public TextDecorator underline(final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
-    decoratedContent.setSpan(new UnderlineSpan(), start, end, flag);
+    decoratedContent.setSpan(new UnderlineSpan(), start, end, flags);
 
     return this;
   }
 
   public TextDecorator setTextColor(final @ColorRes int resColorId, final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
-    decoratedContent.setSpan(new ForegroundColorSpan(ContextCompat.getColor(textView.getContext(), resColorId)), start, end, flag);
+    decoratedContent.setSpan(new ForegroundColorSpan(ContextCompat.getColor(textView.getContext(), resColorId)), start, end,
+        flags);
 
     return this;
   }
@@ -82,21 +84,22 @@ public class TextDecorator {
 
   public TextDecorator insertBullet(final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
-    decoratedContent.setSpan(new BulletSpan(), start, end, flag);
+    decoratedContent.setSpan(new BulletSpan(), start, end, flags);
 
     return this;
   }
 
   public TextDecorator insertBullet(final int gapWidth, final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
-    decoratedContent.setSpan(new BulletSpan(gapWidth), start, end, flag);
+    decoratedContent.setSpan(new BulletSpan(gapWidth), start, end, flags);
 
     return this;
   }
 
   public TextDecorator insertBullet(final int gapWidth, @ColorRes int colorResId, final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
-    decoratedContent.setSpan(new BulletSpan(gapWidth, ContextCompat.getColor(textView.getContext(), colorResId)), start, end, flag);
+    decoratedContent.setSpan(new BulletSpan(gapWidth, ContextCompat.getColor(textView.getContext(), colorResId)), start, end,
+        flags);
 
     return this;
   }
@@ -112,7 +115,7 @@ public class TextDecorator {
         super.updateDrawState(ds);
         ds.setUnderlineText(underlineText);
       }
-    }, start, end, flag);
+    }, start, end, flags);
     textView.setMovementMethod(LinkMovementMethod.getInstance());
 
     return this;
@@ -120,7 +123,7 @@ public class TextDecorator {
 
   public TextDecorator makeTextClickable(final ClickableSpan clickableSpan, final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
-    decoratedContent.setSpan(clickableSpan, start, end, flag);
+    decoratedContent.setSpan(clickableSpan, start, end, flags);
     textView.setMovementMethod(LinkMovementMethod.getInstance());
 
     return this;
@@ -128,126 +131,131 @@ public class TextDecorator {
 
   public TextDecorator insertImage(final @DrawableRes int resId, final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
-    decoratedContent.setSpan(new ImageSpan(textView.getContext(), resId), start, end, flag);
+    decoratedContent.setSpan(new ImageSpan(textView.getContext(), resId), start, end, flags);
 
     return this;
   }
 
   public TextDecorator quote(final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
-    decoratedContent.setSpan(new QuoteSpan(), start, end, flag);
+    decoratedContent.setSpan(new QuoteSpan(), start, end, flags);
 
     return this;
   }
 
   public TextDecorator quote(final @ColorRes int colorResId, final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
-    decoratedContent.setSpan(new QuoteSpan(ContextCompat.getColor(textView.getContext(), colorResId)), start, end, flag);
+    decoratedContent.setSpan(new QuoteSpan(ContextCompat.getColor(textView.getContext(), colorResId)), start, end,
+        flags);
 
     return this;
   }
 
   public TextDecorator strikethrough(final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
-    decoratedContent.setSpan(new StrikethroughSpan(), start, end, flag);
+    decoratedContent.setSpan(new StrikethroughSpan(), start, end, flags);
 
     return this;
   }
 
   public TextDecorator setTextStyle(final int style, final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
-    decoratedContent.setSpan(new StyleSpan(style), start, end, flag);
+    decoratedContent.setSpan(new StyleSpan(style), start, end, flags);
 
     return this;
   }
 
   public TextDecorator alignText(final Layout.Alignment alignment, final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
-    decoratedContent.setSpan(new AlignmentSpan.Standard(alignment), start, end, flag);
+    decoratedContent.setSpan(new AlignmentSpan.Standard(alignment), start, end, flags);
 
     return this;
   }
 
   public TextDecorator setSubscript(final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
-    decoratedContent.setSpan(new SubscriptSpan(), start, end, flag);
+    decoratedContent.setSpan(new SubscriptSpan(), start, end, flags);
 
     return this;
   }
 
   public TextDecorator setSuperscript(final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
-    decoratedContent.setSpan(new SuperscriptSpan(), start, end, flag);
+    decoratedContent.setSpan(new SuperscriptSpan(), start, end, flags);
 
     return this;
   }
 
   public TextDecorator setTypeface(final String family, final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
-    decoratedContent.setSpan(new TypefaceSpan(family), start, end, flag);
+    decoratedContent.setSpan(new TypefaceSpan(family), start, end, flags);
 
     return this;
   }
 
   public TextDecorator setTextAppearance(final int appearance, final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
-    decoratedContent.setSpan(new TextAppearanceSpan(textView.getContext(), appearance), start, end, flag);
+    decoratedContent.setSpan(new TextAppearanceSpan(textView.getContext(), appearance), start, end,
+        flags);
 
     return this;
   }
 
   public TextDecorator setTextAppearance(final int appearance, final int colorList, final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
-    decoratedContent.setSpan(new TextAppearanceSpan(textView.getContext(), appearance, colorList), start, end, flag);
+    decoratedContent.setSpan(new TextAppearanceSpan(textView.getContext(), appearance, colorList), start, end,
+        flags);
 
     return this;
   }
 
   public TextDecorator setTextAppearance(String family, int style, int size, ColorStateList color, ColorStateList linkColor, final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
-    decoratedContent.setSpan(new TextAppearanceSpan(family, style, size, color, linkColor), start, end, flag);
+    decoratedContent.setSpan(new TextAppearanceSpan(family, style, size, color, linkColor), start, end,
+        flags);
 
     return this;
   }
 
   public TextDecorator setAbsoluteSize(final int size, final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
-    decoratedContent.setSpan(new AbsoluteSizeSpan(size), start, end, flag);
+    decoratedContent.setSpan(new AbsoluteSizeSpan(size), start, end, flags);
 
     return this;
   }
 
   public TextDecorator setAbsoluteSize(final int size, final boolean dip, final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
-    decoratedContent.setSpan(new AbsoluteSizeSpan(size, dip), start, end, flag);
+    decoratedContent.setSpan(new AbsoluteSizeSpan(size, dip), start, end, flags);
 
     return this;
   }
 
   public TextDecorator setRelativeSize(final float proportion, final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
-    decoratedContent.setSpan(new RelativeSizeSpan(proportion), start, end, flag);
+    decoratedContent.setSpan(new RelativeSizeSpan(proportion), start, end, flags);
 
     return this;
   }
 
   public TextDecorator scaleX(final float proportion, final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
-    decoratedContent.setSpan(new ScaleXSpan(proportion), start, end, flag);
+    decoratedContent.setSpan(new ScaleXSpan(proportion), start, end, flags);
 
     return this;
   }
 
   public TextDecorator blur(final float radius, final BlurMaskFilter.Blur style, final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
-    decoratedContent.setSpan(new BlurMaskFilter(radius, style), start, end, flag);
+    decoratedContent.setSpan(new MaskFilterSpan(new BlurMaskFilter(radius, style)), start, end, flags);
 
     return this;
   }
 
   public TextDecorator emboss(final float[] direction, final float ambient, final float specular, final float blurRadius, final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
-    decoratedContent.setSpan(new EmbossMaskFilter(direction, ambient, specular, blurRadius), start, end, flag);
+    decoratedContent.setSpan(new MaskFilterSpan(new EmbossMaskFilter(direction, ambient, specular, blurRadius)), start, end,
+        flags);
 
     return this;
   }

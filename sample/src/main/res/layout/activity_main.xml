@@ -13,7 +13,7 @@
     >
 
   <TextView
-      android:id="@+id/tvTest"
+      android:id="@+id/tvContent"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       tools:text="Hello World!"
