@@ -1,4 +1,4 @@
-# text-decorator
+# Text Decorator
 Decorate your TextView easily
 
 ## License
