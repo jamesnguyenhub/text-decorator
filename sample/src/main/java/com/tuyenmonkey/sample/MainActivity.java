@@ -11,10 +11,9 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     final TextView tvTest = (TextView)findViewById(R.id.tvTest);
+    String text = "Tui la Tuyen Monkey!\nlsjdflksdj";
     TextDecorator
-        .decorate(tvTest, "Tui la Tuyen Monkey!")
-        .setTextColor(R.color.colorPrimaryDark, 0, 5)
-        .setBackgroundColor(R.color.colorAccent, 0, 5)
+        .decorate(tvTest, text)
         .build();
   }
 }
