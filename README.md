@@ -1,4 +1,5 @@
 # Text Decorator
+[![Build Status](https://travis-ci.org/nntuyen/text-decorator.svg?branch=master)](https://travis-ci.org/nntuyen/text-decorator)
 Decorate your TextView easily
 
 ![](screenshot/screenshot.gif)
