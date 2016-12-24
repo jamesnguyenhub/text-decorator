@@ -1,6 +1,8 @@
 # Text Decorator
 Decorate your TextView easily
 
+![](screenshot/screenshot.gif)
+
 ## Usage
 ```java
 TextDecorator
