@@ -1,6 +1,27 @@
 # Text Decorator
 Decorate your TextView easily
 
+## Usage
+```java
+TextDecorator
+        .decorate(textView, text)
+        .setTextColor(R.color.colorAccent, 0, 5)
+        .setBackgroundColor(R.color.colorPrimary, 6, 11)
+        .strikethrough(12, 26)
+        .setTextStyle(Typeface.BOLD | Typeface.ITALIC, 27, 40)
+        .setTypeface("serif", 70, 77)
+        .setSuperscript(78, 86)
+        .setSubscript(87, 92)
+        .underline(120, 200)
+        .blur(3, BlurMaskFilter.Blur.NORMAL, 0, 2)
+        .makeTextClickable(new OnTextClickListener() {
+          @Override public void onClick(View view, String text) {
+            Toast.makeText(MainActivity.this, text, Toast.LENGTH_SHORT).show();
+          }
+        }, 250, 270, false)
+        .build();
+```
+
 ## License
 
     Copyright 2016 Tuyen Monkey
