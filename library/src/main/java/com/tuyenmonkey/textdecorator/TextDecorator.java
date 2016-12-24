@@ -67,6 +67,19 @@ public class TextDecorator {
     return this;
   }
 
+  public TextDecorator underline(final String... texts) {
+    int index;
+
+    for (String text : texts) {
+      if (content.contains(text)) {
+        index = content.indexOf(text);
+        decoratedContent.setSpan(new UnderlineSpan(), index, index + text.length(), flags);
+      }
+    }
+
+    return this;
+  }
+
   public TextDecorator setTextColor(final @ColorRes int resColorId, final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
     decoratedContent.setSpan(new ForegroundColorSpan(ContextCompat.getColor(textView.getContext(), resColorId)), start, end,
@@ -75,9 +88,35 @@ public class TextDecorator {
     return this;
   }
 
+  public TextDecorator setTextColor(final @ColorRes int resColorId, final String... texts) {
+    int index;
+
+    for (String text : texts) {
+      if (content.contains(text)) {
+        index = content.indexOf(text);
+        decoratedContent.setSpan(new ForegroundColorSpan(ContextCompat.getColor(textView.getContext(), resColorId)), index, index + text.length(), flags);
+      }
+    }
+
+    return this;
+  }
+
   public TextDecorator setBackgroundColor(final @ColorRes int colorResId, final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
     decoratedContent.setSpan(new BackgroundColorSpan(ContextCompat.getColor(textView.getContext(), colorResId)), start, end, 0);
+
+    return this;
+  }
+
+  public TextDecorator setBackgroundColor(final @ColorRes int colorResId, final String... texts) {
+    int index;
+
+    for (String text : texts) {
+      if (content.contains(text)) {
+        index = content.indexOf(text);
+        decoratedContent.setSpan(new BackgroundColorSpan(ContextCompat.getColor(textView.getContext(), colorResId)), index, index + text.length(), flags);
+      }
+    }
 
     return this;
   }
@@ -121,9 +160,49 @@ public class TextDecorator {
     return this;
   }
 
+  public TextDecorator makeTextClickable(final OnTextClickListener listener, final boolean underlineText, final String... texts) {
+    int index;
+
+    for (final String text : texts) {
+      if (content.contains(text)) {
+        index = content.indexOf(text);
+
+        decoratedContent.setSpan(new ClickableSpan() {
+          @Override public void onClick(View view) {
+            listener.onClick(view, text);
+          }
+
+          @Override public void updateDrawState(TextPaint ds) {
+            super.updateDrawState(ds);
+            ds.setUnderlineText(underlineText);
+          }
+        }, index, index + text.length(), flags);
+      }
+    }
+
+    textView.setMovementMethod(LinkMovementMethod.getInstance());
+
+    return this;
+  }
+
   public TextDecorator makeTextClickable(final ClickableSpan clickableSpan, final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
     decoratedContent.setSpan(clickableSpan, start, end, flags);
+    textView.setMovementMethod(LinkMovementMethod.getInstance());
+
+    return this;
+  }
+
+  public TextDecorator makeTextClickable(final ClickableSpan clickableSpan, final String... texts) {
+    int index;
+
+    for (String text : texts) {
+      if (content.contains(text)) {
+        index = content.indexOf(text);
+        decoratedContent.setSpan(clickableSpan, index, index + text.length(), flags);
+      }
+    }
+
     textView.setMovementMethod(LinkMovementMethod.getInstance());
 
     return this;
@@ -143,10 +222,36 @@ public class TextDecorator {
     return this;
   }
 
+  public TextDecorator quote(final String... texts) {
+    int index;
+
+    for (String text : texts) {
+      if (content.contains(text)) {
+        index = content.indexOf(text);
+        decoratedContent.setSpan(new QuoteSpan(), index, index + text.length(), flags);
+      }
+    }
+
+    return this;
+  }
+
   public TextDecorator quote(final @ColorRes int colorResId, final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
     decoratedContent.setSpan(new QuoteSpan(ContextCompat.getColor(textView.getContext(), colorResId)), start, end,
         flags);
+
+    return this;
+  }
+
+  public TextDecorator quote(final @ColorRes int colorResId, final String... texts) {
+    int index;
+
+    for (String text : texts) {
+      if (content.contains(text)) {
+        index = content.indexOf(text);
+        decoratedContent.setSpan(new QuoteSpan(ContextCompat.getColor(textView.getContext(), colorResId)), index, index + text.length(), flags);
+      }
+    }
 
     return this;
   }
@@ -158,9 +263,35 @@ public class TextDecorator {
     return this;
   }
 
+  public TextDecorator strikethrough(final String... texts) {
+    int index;
+
+    for (String text : texts) {
+      if (content.contains(text)) {
+        index = content.indexOf(text);
+        decoratedContent.setSpan(new StrikethroughSpan(), index, index + text.length(), flags);
+      }
+    }
+
+    return this;
+  }
+
   public TextDecorator setTextStyle(final int style, final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
     decoratedContent.setSpan(new StyleSpan(style), start, end, flags);
+
+    return this;
+  }
+
+  public TextDecorator setTextStyle(final int style, final String... texts) {
+    int index;
+
+    for (String text : texts) {
+      if (content.contains(text)) {
+        index = content.indexOf(text);
+        decoratedContent.setSpan(new StyleSpan(style), index, index + text.length(), flags);
+      }
+    }
 
     return this;
   }
@@ -172,9 +303,35 @@ public class TextDecorator {
     return this;
   }
 
+  public TextDecorator alignText(final Layout.Alignment alignment, final String... texts) {
+    int index;
+
+    for (String text : texts) {
+      if (content.contains(text)) {
+        index = content.indexOf(text);
+        decoratedContent.setSpan(new AlignmentSpan.Standard(alignment), index, index + text.length(), flags);
+      }
+    }
+
+    return this;
+  }
+
   public TextDecorator setSubscript(final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
     decoratedContent.setSpan(new SubscriptSpan(), start, end, flags);
+
+    return this;
+  }
+
+  public TextDecorator setSubscript(final String... texts) {
+    int index;
+
+    for (String text : texts) {
+      if (content.contains(text)) {
+        index = content.indexOf(text);
+        decoratedContent.setSpan(new SubscriptSpan(), index, index + text.length(), flags);
+      }
+    }
 
     return this;
   }
@@ -186,9 +343,35 @@ public class TextDecorator {
     return this;
   }
 
+  public TextDecorator setSuperscript(final String... texts) {
+    int index;
+
+    for (String text : texts) {
+      if (content.contains(text)) {
+        index = content.indexOf(text);
+        decoratedContent.setSpan(new SuperscriptSpan(), index, index + text.length(), flags);
+      }
+    }
+
+    return this;
+  }
+
   public TextDecorator setTypeface(final String family, final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
     decoratedContent.setSpan(new TypefaceSpan(family), start, end, flags);
+
+    return this;
+  }
+
+  public TextDecorator setTypeface(final String family, final String... texts) {
+    int index;
+
+    for (String text : texts) {
+      if (content.contains(text)) {
+        index = content.indexOf(text);
+        decoratedContent.setSpan(new TypefaceSpan(family), index, index + text.length(), flags);
+      }
+    }
 
     return this;
   }
@@ -201,10 +384,36 @@ public class TextDecorator {
     return this;
   }
 
+  public TextDecorator setTextAppearance(final int appearance, final String... texts) {
+    int index;
+
+    for (String text : texts) {
+      if (content.contains(text)) {
+        index = content.indexOf(text);
+        decoratedContent.setSpan(new TextAppearanceSpan(textView.getContext(), appearance), index, index + text.length(), flags);
+      }
+    }
+
+    return this;
+  }
+
   public TextDecorator setTextAppearance(final int appearance, final int colorList, final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
     decoratedContent.setSpan(new TextAppearanceSpan(textView.getContext(), appearance, colorList), start, end,
         flags);
+
+    return this;
+  }
+
+  public TextDecorator setTextAppearance(final int appearance, final int colorList, final String... texts) {
+    int index;
+
+    for (String text : texts) {
+      if (content.contains(text)) {
+        index = content.indexOf(text);
+        decoratedContent.setSpan(new TextAppearanceSpan(textView.getContext(), appearance, colorList), index, index + text.length(), flags);
+      }
+    }
 
     return this;
   }
@@ -217,9 +426,35 @@ public class TextDecorator {
     return this;
   }
 
+  public TextDecorator setTextAppearance(String family, int style, int size, ColorStateList color, ColorStateList linkColor, final String... texts) {
+    int index;
+
+    for (String text : texts) {
+      if (content.contains(text)) {
+        index = content.indexOf(text);
+        decoratedContent.setSpan(new TextAppearanceSpan(family, style, size, color, linkColor), index, index + text.length(), flags);
+      }
+    }
+
+    return this;
+  }
+
   public TextDecorator setAbsoluteSize(final int size, final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
     decoratedContent.setSpan(new AbsoluteSizeSpan(size), start, end, flags);
+
+    return this;
+  }
+
+  public TextDecorator setAbsoluteSize(final int size, final String... texts) {
+    int index;
+
+    for (String text : texts) {
+      if (content.contains(text)) {
+        index = content.indexOf(text);
+        decoratedContent.setSpan(new AbsoluteSizeSpan(size), index, index + text.length(), flags);
+      }
+    }
 
     return this;
   }
@@ -231,9 +466,35 @@ public class TextDecorator {
     return this;
   }
 
+  public TextDecorator setAbsoluteSize(final int size, final boolean dip, final String... texts) {
+    int index;
+
+    for (String text : texts) {
+      if (content.contains(text)) {
+        index = content.indexOf(text);
+        decoratedContent.setSpan(new AbsoluteSizeSpan(size, dip), index, index + text.length(), flags);
+      }
+    }
+
+    return this;
+  }
+
   public TextDecorator setRelativeSize(final float proportion, final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
     decoratedContent.setSpan(new RelativeSizeSpan(proportion), start, end, flags);
+
+    return this;
+  }
+
+  public TextDecorator setRelativeSize(final float proportion, final String... texts) {
+    int index;
+
+    for (String text : texts) {
+      if (content.contains(text)) {
+        index = content.indexOf(text);
+        decoratedContent.setSpan(new RelativeSizeSpan(proportion), index, index + text.length(), flags);
+      }
+    }
 
     return this;
   }
@@ -245,9 +506,35 @@ public class TextDecorator {
     return this;
   }
 
+  public TextDecorator scaleX(final float proportion, final String... texts) {
+    int index;
+
+    for (String text : texts) {
+      if (content.contains(text)) {
+        index = content.indexOf(text);
+        decoratedContent.setSpan(new ScaleXSpan(proportion), index, index + text.length(), flags);
+      }
+    }
+
+    return this;
+  }
+
   public TextDecorator blur(final float radius, final BlurMaskFilter.Blur style, final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
     decoratedContent.setSpan(new MaskFilterSpan(new BlurMaskFilter(radius, style)), start, end, flags);
+
+    return this;
+  }
+
+  public TextDecorator blur(final float radius, final BlurMaskFilter.Blur style, final String... texts) {
+    int index;
+
+    for (String text : texts) {
+      if (content.contains(text)) {
+        index = content.indexOf(text);
+        decoratedContent.setSpan(new MaskFilterSpan(new BlurMaskFilter(radius, style)), index, index + text.length(), flags);
+      }
+    }
 
     return this;
   }
@@ -256,6 +543,19 @@ public class TextDecorator {
     checkIndexOutOfBoundsException(start, end);
     decoratedContent.setSpan(new MaskFilterSpan(new EmbossMaskFilter(direction, ambient, specular, blurRadius)), start, end,
         flags);
+
+    return this;
+  }
+
+  public TextDecorator emboss(final float[] direction, final float ambient, final float specular, final float blurRadius, final String... texts) {
+    int index;
+
+    for (String text : texts) {
+      if (content.contains(text)) {
+        index = content.indexOf(text);
+        decoratedContent.setSpan(new MaskFilterSpan(new EmbossMaskFilter(direction, ambient, specular, blurRadius)), index, index + text.length(), flags);
+      }
+    }
 
     return this;
   }
