@@ -3,11 +3,10 @@
 
 Decorate your TextView easily
 
-![](screenshot/screenshot.gif)
+![](screenshot/screenshot2.gif)
 
 ## Usage
 
-Span text by index
 ```java
 TextDecorator
         .decorate(textView, text)
@@ -27,7 +26,8 @@ TextDecorator
         }, 250, 270, false)
         .build();
 ```
-... or by text
+or
+
 ```java
 TextDecorator
         .decorate(tvContent, text)
