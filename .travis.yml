@@ -2,14 +2,11 @@ language: android
 android:
   components:
   - tools
+  - tools
   - platform-tools
   - build-tools-24.0.2
   - android-25
   - extra-android-m2repository
-  - extra-google-google_play_services
-  - extra-google-m2repository
-  - extra-android-m2repository
-  - addon-google_apis-google-24
 jdk:
 - oraclejdk8
 script:
