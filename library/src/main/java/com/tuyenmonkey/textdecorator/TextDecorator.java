@@ -80,7 +80,7 @@ public class TextDecorator {
     return this;
   }
 
-  public TextDecorator setTextColor(final @ColorRes int resColorId, final int start, final int end) {
+  public TextDecorator setTextColor(@ColorRes final int resColorId, final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
     decoratedContent.setSpan(new ForegroundColorSpan(ContextCompat.getColor(textView.getContext(), resColorId)), start, end,
         flags);
@@ -88,7 +88,7 @@ public class TextDecorator {
     return this;
   }
 
-  public TextDecorator setTextColor(final @ColorRes int resColorId, final String... texts) {
+  public TextDecorator setTextColor(@ColorRes final int resColorId, final String... texts) {
     int index;
 
     for (String text : texts) {
@@ -101,14 +101,14 @@ public class TextDecorator {
     return this;
   }
 
-  public TextDecorator setBackgroundColor(final @ColorRes int colorResId, final int start, final int end) {
+  public TextDecorator setBackgroundColor(@ColorRes final int colorResId, final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
     decoratedContent.setSpan(new BackgroundColorSpan(ContextCompat.getColor(textView.getContext(), colorResId)), start, end, 0);
 
     return this;
   }
 
-  public TextDecorator setBackgroundColor(final @ColorRes int colorResId, final String... texts) {
+  public TextDecorator setBackgroundColor(@ColorRes final int colorResId, final String... texts) {
     int index;
 
     for (String text : texts) {
@@ -135,7 +135,7 @@ public class TextDecorator {
     return this;
   }
 
-  public TextDecorator insertBullet(final int gapWidth, @ColorRes int colorResId, final int start, final int end) {
+  public TextDecorator insertBullet(final int gapWidth, @ColorRes final int colorResId, final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
     decoratedContent.setSpan(new BulletSpan(gapWidth, ContextCompat.getColor(textView.getContext(), colorResId)), start, end,
         flags);
@@ -208,7 +208,7 @@ public class TextDecorator {
     return this;
   }
 
-  public TextDecorator insertImage(final @DrawableRes int resId, final int start, final int end) {
+  public TextDecorator insertImage(@DrawableRes final int resId, final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
     decoratedContent.setSpan(new ImageSpan(textView.getContext(), resId), start, end, flags);
 
@@ -235,7 +235,7 @@ public class TextDecorator {
     return this;
   }
 
-  public TextDecorator quote(final @ColorRes int colorResId, final int start, final int end) {
+  public TextDecorator quote(@ColorRes final int colorResId, final int start, final int end) {
     checkIndexOutOfBoundsException(start, end);
     decoratedContent.setSpan(new QuoteSpan(ContextCompat.getColor(textView.getContext(), colorResId)), start, end,
         flags);
@@ -243,7 +243,7 @@ public class TextDecorator {
     return this;
   }
 
-  public TextDecorator quote(final @ColorRes int colorResId, final String... texts) {
+  public TextDecorator quote(@ColorRes final int colorResId, final String... texts) {
     int index;
 
     for (String text : texts) {
