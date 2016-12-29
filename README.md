@@ -3,9 +3,10 @@
 
 Decorate your TextView easily
 
-![](screenshot/screenshot.gif)
+![](screenshot/screenshot2.gif)
 
 ## Usage
+
 ```java
 TextDecorator
         .decorate(textView, text)
@@ -25,7 +26,24 @@ TextDecorator
         }, 250, 270, false)
         .build();
 ```
+or
 
+```java
+TextDecorator
+        .decorate(tvContent, text)
+        .setTextColor(R.color.colorAccent, "Lorem", "amet")
+        .setBackgroundColor(R.color.colorPrimary, "dolor", "elit")
+        .strikethrough("Duis", "Praesent")
+        .underline("sodales", "quam")
+        .setSubscript("vitae")
+        .makeTextClickable(new OnTextClickListener() {
+          @Override public void onClick(View view, String text) {
+            Toast.makeText(MainActivity.this, text, Toast.LENGTH_SHORT).show();
+          }
+        }, false, "porta", "commodo", "tempor venenatis nulla")
+        .setTextColor(android.R.color.holo_green_light, "porta", "commodo", "tempor venenatis nulla")
+        .build();
+```
 ## License
 
     Copyright 2016 Tuyen Monkey
