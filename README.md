@@ -47,9 +47,8 @@ TextDecorator
 
 ## Download
 
-Add it in your root build.gradle at the end of repositories:
-
-```
+Add this to your root build.gradle
+```javascript
 allprojects {
   repositories {
     ...
@@ -59,7 +58,7 @@ allprojects {
 }
 ```
 
-```
+```javascript
 dependencies {
     compile 'com.tuyenmonkey:text-decorator:1.0.0-SNAPSHOT'
 }
