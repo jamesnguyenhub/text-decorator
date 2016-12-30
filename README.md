@@ -44,6 +44,27 @@ TextDecorator
         .setTextColor(android.R.color.holo_green_light, "porta", "commodo", "tempor venenatis nulla")
         .build();
 ```
+
+## Download
+
+Add it in your root build.gradle at the end of repositories:
+
+```
+allprojects {
+  repositories {
+    ...
+    maven { 
+        url "https://oss.sonatype.org/content/repositories/snapshots" 
+    }
+}
+```
+
+```
+dependencies {
+    compile 'com.tuyenmonkey:text-decorator:1.0.0-SNAPSHOT'
+}
+```
+
 ## License
 
     Copyright 2016 Tuyen Monkey
