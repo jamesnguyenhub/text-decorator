@@ -31,7 +31,7 @@ or
 
 ```java
 TextDecorator
-        .decorate(tvContent, text)
+        .decorate(textView, text)
         .setTextColor(R.color.colorAccent, "Lorem", "amet")
         .setBackgroundColor(R.color.colorPrimary, "dolor", "elit")
         .strikethrough("Duis", "Praesent")
