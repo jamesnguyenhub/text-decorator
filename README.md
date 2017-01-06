@@ -48,21 +48,11 @@ TextDecorator
 ```
 
 ## Download
-
-Add this to your root build.gradle
-```javascript
-allprojects {
-  repositories {
-    ...
-    maven { 
-        url "https://oss.sonatype.org/content/repositories/snapshots" 
-    }
-}
-```
+Gradle
 
 ```javascript
 dependencies {
-    compile 'com.tuyenmonkey:text-decorator:1.0.0-SNAPSHOT'
+    compile 'com.tuyenmonkey:text-decorator:1.0.0'
 }
 ```
 
