@@ -1,74 +1,12 @@
 # Text Decorator
-[![Build Status](https://travis-ci.org/nntuyen/text-decorator.svg?branch=master)](https://travis-ci.org/nntuyen/text-decorator)
-[![Android Weekly](https://img.shields.io/badge/Android%20Weekly-%23238-blue.svg)](http://androidweekly.net/issues/issue-238)
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Text%20Decorator-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/4982)
-
-Decorate your TextView easily
-
-![](screenshot/screenshot2.gif)
 
 ## Usage
 
-```java
-TextDecorator
-        .decorate(textView, text)
-        .setTextColor(R.color.colorAccent, 0, 5)
-        .setBackgroundColor(R.color.colorPrimary, 6, 11)
-        .strikethrough(12, 26)
-        .setTextStyle(Typeface.BOLD | Typeface.ITALIC, 27, 40)
-        .setTypeface("serif", 70, 77)
-        .setSuperscript(78, 86)
-        .setSubscript(87, 92)
-        .underline(120, 200)
-        .blur(3, BlurMaskFilter.Blur.NORMAL, 0, 2)
-        .makeTextClickable(new OnTextClickListener() {
-          @Override public void onClick(View view, String text) {
-            Toast.makeText(MainActivity.this, text, Toast.LENGTH_SHORT).show();
-          }
-        }, 250, 270, false)
-        .build();
-```
-or
-
-```java
-TextDecorator
-        .decorate(textView, text)
-        .setTextColor(R.color.colorAccent, "Lorem", "amet")
-        .setBackgroundColor(R.color.colorPrimary, "dolor", "elit")
-        .strikethrough("Duis", "Praesent")
-        .underline("sodales", "quam")
-        .setSubscript("vitae")
-        .makeTextClickable(new OnTextClickListener() {
-          @Override public void onClick(View view, String text) {
-            Toast.makeText(MainActivity.this, text, Toast.LENGTH_SHORT).show();
-          }
-        }, false, "porta", "commodo", "tempor venenatis nulla")
-        .setTextColor(android.R.color.holo_green_light, "porta", "commodo", "tempor venenatis nulla")
-        .build();
-```
-
 ## Download
-
-Add this to your root build.gradle
-```javascript
-allprojects {
-  repositories {
-    ...
-    maven { 
-        url "https://oss.sonatype.org/content/repositories/snapshots" 
-    }
-}
-```
-
-```javascript
-dependencies {
-    compile 'com.tuyenmonkey:text-decorator:1.0.0-SNAPSHOT'
-}
-```
 
 ## License
 
-    Copyright 2016 Tuyen Monkey
+    Copyright 2017 Tuyen Monkey
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
