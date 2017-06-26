@@ -1,7 +1,5 @@
 # Text Decorator
 [![Build Status](https://travis-ci.org/nntuyen/text-decorator.svg?branch=master)](https://travis-ci.org/nntuyen/text-decorator)
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Text%20Decorator-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/4982)
-[![Android Gems](http://www.android-gems.com/badge/nntuyen/text-decorator.svg?branch=master)](http://www.android-gems.com/lib/nntuyen/text-decorator)
 
 Decorate your TextView easily
 
